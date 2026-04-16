@@ -27,3 +27,26 @@ names(lobster_abundance)
 unique(lobster_abundance$SITE)
 unique(lobster_abundance$SIZE_MM)
 ```
+```{r}
+lobster_abundance <- lobster_abundance %>%
+  mutate(SIZE_MM = na_if(SIZE_MM, -99999))
+```
+```{r}
+no_napl <- lobster_abundance %>%
+  filter(SITE != "NAPL")
+unique(no_napl$SITE)
+```
+
+```{r}
+aque_large <- lobster_abundance %>%
+  filter(SITE == "AQUE", SIZE_MM > 70)
+summary(aque_large$SIZE_MM)
+unique(aque_large$SITE)
+```
+```{r}
+max_size <- lobster_abundance %>%
+  group_by(SITE, MONTH) %>%
+  summarise(max_size = max(SIZE_MM, na.rm = TRUE))
+head(max_size)
+```
+
