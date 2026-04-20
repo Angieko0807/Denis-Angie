@@ -78,6 +78,10 @@ print(hist_plot)
 lobster_yearly <- lobster_abundance %>%
   group_by(YEAR, SITE) %>%
   summarise(total_lobsters = n(), .groups = "drop")
+
+line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, color = SITE)) +
+  geom_line()
+
 print(line_plot)
 ```
 
@@ -91,6 +95,14 @@ print(line_plot)
 lobster_size <- lobster_abundance %>%
   filter(YEAR %in% c(2019, 2020, 2021)) %>%
   mutate(size_category = ifelse(SIZE_MM < 70, "Small", "Large"))
+
+lobster_counts <- lobster_size %>%
+  group_by(SITE, size_category) %>%
+  summarise(count = n(), .groups = "drop")
+
+bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
+  geom_col(position = "dodge")
+
 print(bar_plot)
 ```
 
@@ -131,8 +143,8 @@ ggsave(
   height = 5
 )
 ```
+
 ```{r}
 list.files("figs")
 
 ```
-
