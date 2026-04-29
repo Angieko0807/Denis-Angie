@@ -31,6 +31,7 @@ unique(lobster_abundance$SIZE_MM)
 ```{r}
 lobster_abundance <- lobster_abundance %>%
   mutate(SIZE_MM = na_if(SIZE_MM, -99999))
+unique(lobster_abundance$SIZE_MM)
 ```
 
 ```{r}
@@ -49,8 +50,7 @@ unique(aque_large$SITE)
 ```{r}
 max_size <- lobster_abundance %>%
   group_by(SITE, MONTH) %>%
-  summarise(max_size = max(SIZE_MM, na.rm = TRUE))
-head(max_size)
+  summarise(max_size = max(SIZE_MM, na.rm = TRUE), .groups = "drop")
 ```
 
 ## Exercise: Data Visualization
@@ -72,22 +72,17 @@ hist_plot <- ggplot(lobster_abundance, aes(x = SIZE_MM)) +
   geom_histogram(binwidth = 5) +
   facet_wrap(~ SITE)
 print(hist_plot)
+ labs(title = "Distribution of Lobster Sizes by Site")
 ```
 
 ```{r}
 lobster_yearly <- lobster_abundance %>%
   group_by(YEAR, SITE) %>%
-  summarise(total_lobsters = n(), .groups = "drop")
+  summarise(total_lobsters = sum(COUNT, na.rm = TRUE), .groups = "drop")
 
 line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, color = SITE)) +
   geom_line()
 
-print(line_plot)
-```
-
-```{r}
-line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, color = SITE)) +
-  geom_line()
 print(line_plot)
 ```
 
@@ -98,7 +93,7 @@ lobster_size <- lobster_abundance %>%
 
 lobster_counts <- lobster_size %>%
   group_by(SITE, size_category) %>%
-  summarise(count = n(), .groups = "drop")
+  summarise(count = sum(COUNT, na.rm = TRUE), .groups = "drop")
 
 bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
   geom_col(position = "dodge")
@@ -107,9 +102,6 @@ print(bar_plot)
 ```
 
 ```{r}
-lobster_counts <- lobster_size %>%
-  group_by(SITE, size_category) %>%
-  summarise(count = n(), .groups = "drop")
 bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
   geom_col(position = "dodge")
 
@@ -125,12 +117,18 @@ pretty_line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, col
     y = "Number of Lobsters",
     color = "Site"
   ) +
+ scale_x_continuous(breaks = seq(2000, 2022, by = 2)) +
+  scale_color_brewer(palette = "Set1") +
   theme_light() +
   theme(
     text = element_text(size = 12),
-    axis.title.y = element_text(face = "bold"),
-    panel.grid.major = element_line(linetype = "dotted")
+    axis.title = element_text(face = "bold"),
+    plot.title = element_text(face = "bold", size = 14),
+    panel.grid.major = element_line(linetype = "dotted"),
+    panel.background = element_rect(fill = "white")
   )
+
+pretty_line_plot
 print(pretty_line_plot)
 ```
 
@@ -148,3 +146,12 @@ ggsave(
 list.files("figs")
 
 ```
+```{r}
+lobster_mpa <- lobster_abundance %>% 
+  mutate(DESIGNATION = case_when(
+    SITE %in% c("IVEE", "NAPL") ~ "MPA",
+    TRUE ~ "not MPA"
+  ))
+head(lobster_mpa)
+```
+
