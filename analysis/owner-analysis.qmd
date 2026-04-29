@@ -70,9 +70,10 @@ lobster_abundance <- read_csv("../data/Lobster_Abundance_All_Years_20220829.csv"
 ```{r}
 hist_plot <- ggplot(lobster_abundance, aes(x = SIZE_MM)) +
   geom_histogram(binwidth = 5) +
-  facet_wrap(~ SITE)
-print(hist_plot)
- labs(title = "Distribution of Lobster Sizes by Site")
+  facet_wrap(~ SITE) +
+  labs(title = "Distribution of Lobster Sizes by Site")
+
+hist_plot
 ```
 
 ```{r}
@@ -95,13 +96,6 @@ lobster_counts <- lobster_size %>%
   group_by(SITE, size_category) %>%
   summarise(count = sum(COUNT, na.rm = TRUE), .groups = "drop")
 
-bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
-  geom_col(position = "dodge")
-
-print(bar_plot)
-```
-
-```{r}
 bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
   geom_col(position = "dodge")
 
