@@ -1,26 +1,150 @@
 ---
 title: "Owner Analysis"
+Author: Angie Kochkarova
 format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Exercise: Explore, Clean, and Wrangle Data
 
 ```{r}
-1 + 1
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(here)
 ```
-
-You can add options to executable code like this
 
 ```{r}
-#| echo: false
-2 * 2
+
+lobster_abundance <- read_csv("../data/Lobster_Abundance_All_Years_20220829.csv")
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r}
+glimpse(lobster_abundance)
+summary(lobster_abundance)
+names(lobster_abundance)
+unique(lobster_abundance$SITE)
+unique(lobster_abundance$SIZE_MM)
+```
+
+```{r}
+lobster_abundance <- lobster_abundance %>%
+  mutate(SIZE_MM = na_if(SIZE_MM, -99999))
+```
+
+```{r}
+no_napl <- lobster_abundance %>%
+  filter(SITE != "NAPL")
+unique(no_napl$SITE)
+```
+
+```{r}
+aque_large <- lobster_abundance %>%
+  filter(SITE == "AQUE", SIZE_MM > 70)
+summary(aque_large$SIZE_MM)
+unique(aque_large$SITE)
+```
+
+```{r}
+max_size <- lobster_abundance %>%
+  group_by(SITE, MONTH) %>%
+  summarise(max_size = max(SIZE_MM, na.rm = TRUE))
+head(max_size)
+```
+
+## Exercise: Data Visualization
+
+```{r}
+## Run this chunk to test exercises ##
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+lobster_abundance <- read_csv("../data/Lobster_Abundance_All_Years_20220829.csv") %>%
+  mutate(SIZE_MM = na_if(SIZE_MM, -99999))
+```
+
+```{r}
+hist_plot <- ggplot(lobster_abundance, aes(x = SIZE_MM)) +
+  geom_histogram(binwidth = 5) +
+  facet_wrap(~ SITE)
+print(hist_plot)
+```
+
+```{r}
+lobster_yearly <- lobster_abundance %>%
+  group_by(YEAR, SITE) %>%
+  summarise(total_lobsters = n(), .groups = "drop")
+
+line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, color = SITE)) +
+  geom_line()
+
+print(line_plot)
+```
+
+```{r}
+line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, color = SITE)) +
+  geom_line()
+print(line_plot)
+```
+
+```{r}
+lobster_size <- lobster_abundance %>%
+  filter(YEAR %in% c(2019, 2020, 2021)) %>%
+  mutate(size_category = ifelse(SIZE_MM < 70, "Small", "Large"))
+
+lobster_counts <- lobster_size %>%
+  group_by(SITE, size_category) %>%
+  summarise(count = n(), .groups = "drop")
+
+bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
+  geom_col(position = "dodge")
+
+print(bar_plot)
+```
+
+```{r}
+lobster_counts <- lobster_size %>%
+  group_by(SITE, size_category) %>%
+  summarise(count = n(), .groups = "drop")
+bar_plot <- ggplot(lobster_counts, aes(x = SITE, y = count, fill = size_category)) +
+  geom_col(position = "dodge")
+
+print(bar_plot)
+```
+
+```{r}
+pretty_line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, color = SITE)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "Total Lobsters Observed by Year",
+    x = "Year",
+    y = "Number of Lobsters",
+    color = "Site"
+  ) +
+  theme_light() +
+  theme(
+    text = element_text(size = 12),
+    axis.title.y = element_text(face = "bold"),
+    panel.grid.major = element_line(linetype = "dotted")
+  )
+print(pretty_line_plot)
+```
+
+```{r}
+library(ggplot2)
+ggsave(
+  filename = "figs/lobster_line_plot.png",
+  plot = pretty_line_plot,
+  width = 8,
+  height = 5
+)
+```
+
+```{r}
+list.files("figs")
+
+```
