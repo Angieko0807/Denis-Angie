@@ -1,5 +1,5 @@
 ---
-title: "collaborator analysis"
+title: "Collaborator Analysis"
 format: html
 editor: visual
 ---
@@ -51,7 +51,7 @@ lobster_traps <- read_csv(here::here("data/Lobster_Trap_Counts_All_Years_2021051
 
 ```{r}
 # histogram 
-ggplot(data = lobster_traps, aes(x = TRAPS)) +
+lobster_hist_plot <- ggplot(data = lobster_traps, aes(x = TRAPS)) +
   geom_histogram(bins = 20, fill = "tan", color = "black") +
   facet_wrap(~ YEAR) +
   labs(
@@ -60,6 +60,8 @@ ggplot(data = lobster_traps, aes(x = TRAPS)) +
     y = "count"
   ) +
   theme_light()
+
+lobster_hist_plot
 ```
 
 ```{r}
@@ -74,7 +76,7 @@ lobster_line_and_point_plot <- ggplot(
   aes(x = YEAR, y = TOTAL_TRAPS, color = SITE)
 ) +
   geom_line(size = 1) +
-  geom_point(size = 2) +
+  geom_point(size = 2) 
   labs(
     title = "Lobster traps over time by Site",
     subtitle = "trend by year",
@@ -130,4 +132,34 @@ New_lobster_pressure_plot <- ggplot(
   )
 
 New_lobster_pressure_plot 
+```
+
+```{r}
+# figures save 
+
+# histogam facet svae 
+ggsave(
+  filename = here::here("analysis", "figs", "lobster_histogram.png"),
+  plot = lobster_hist_plot,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+
+# 
+ggsave(
+  filename = here::here("analysis", "figs", "lobster_line_and_point_plot.png"),
+  plot = lobster_line_and_point_plot,
+  width = 8,
+  height = 5,
+  dpi = 300
+)
+
+ggsave(
+  filename = here::here("analysis","figs", "lobster_pressure_plot.png"),
+  plot = New_lobster_pressure_plot,
+  width = 8,
+  height = 5,
+  dpi = 300
+)
 ```
