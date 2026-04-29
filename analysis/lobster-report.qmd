@@ -1,26 +1,33 @@
 ---
-title: "lobster-report"
+title: "Lobster Report"
+author: Denis and Angie
 format: html
 editor: visual
 ---
 
-## Quarto
+## Introduction
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## Data Source
 
-## Running Code
+The data in this report come from the Environmental Data Initiative data package:
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+-   Santa Barbara Coastal LTER, D. Reed, and R. Miller. 2022. SBC LTER: Reef: Abundance, size and fishing effort for California Spiny Lobster (Panulirus interruptus), ongoing since 2012 ver 8. Environmental Data Initiative. <https://doi.org/10.6073/pasta/25aa371650a671bafad64dd25a39ee18.> Accessed April 16, 2026.
 
-```{r}
-1 + 1
-```
+This data package contains two tables, one focused on lobster abundance and size, and one focused on lobster trap buoy counts. `Lobster_Trap_Counts_All_Years_20210519.csv`and `Lobster_Abundance_All_Years_20220829.csv`
 
-You can add options to executable code like this
+## Abstract Summary
 
-```{r}
-#| echo: false
-2 * 2
-```
+This dataset examines California spiny lobster ,*Panulirus interruptus*, abundance, size, and fishing pressure along the mainland coast of the Santa Barbara Channel. Lobsters are important predators in giant kelp forests, this data sets helps researchers study how fishing and marine protected areas may influence kelp forest communities.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+## Collaborator Analysis and Visualization
+
+Data :Lobster_Trap_Counts_All_Years_20210519.csv \
+In this part of our analysis we worked on the lobster trap counts data. Focusing on two questions, how total trap counts changed over time at each site, and how more recent observations from 2019 to 2021 can be categorized into high and low fishing pressure.
+
+![Line plot showing total lobster trap buoy counts over time across sites.](figs/lobster_line_and_point_plot.png)
+
+This plot shows how total trap buoy counts changed over time at each site. Some sites show higher overall trap counts others remain comparatively low. Here we can see the differences in fishing activity across locations.
+
+![Grouped bar chart showing high and low fishing pressure observations at each site from 2019 to 2021.](figs/lobster_pressure_plot.png)
+
+This plot compares the number of high and low fishing pressure observations across sites for the years 2019 to 2021. ( \< 8 = low/ \>= 8 = high ) Some sites have more frequent high trap counts, which indictates greater fishing pressure during that time.
