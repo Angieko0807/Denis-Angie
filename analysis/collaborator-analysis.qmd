@@ -4,23 +4,130 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Exercise: Explore, Clean, and Wrangle Data
 
 ```{r}
-1 + 1
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(here)
 ```
-
-You can add options to executable code like this
 
 ```{r}
-#| echo: false
-2 * 2
+lobster_traps <- read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519.csv"))
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r}
+glimpse(lobster_traps)
+head(lobster_traps)
+```
+
+```{r}
+#Convert missing values using mutate() and na_if()
+lobster_traps <- lobster_traps %>% 
+    mutate(TRAPS = na_if(TRAPS, -99999))
+
+# filter() practice
+not_napl <- lobster_traps %>% 
+    filter(SITE != "NAPL")
+
+# lobster and carpenteria reef, commercial trap float > 20
+carp_20_traps <- lobster_traps %>% 
+    filter(SITE == "CARP" & TRAPS > 20)
+
+# `group_by() %>% summarize()` practice
+max_lobster_traps <- lobster_traps %>% 
+    group_by(SITE, MONTH) %>%
+    summarize(MAX_TRAPS = max(TRAPS, na.rm = TRUE))
+```
+
+## Exercise: Data Visualization
+
+```{r}
+lobster_traps <- read_csv(here::here("data/Lobster_Trap_Counts_All_Years_20210519.csv")) %>% 
+    mutate(TRAPS = na_if(TRAPS, -99999))
+```
+
+```{r}
+# histogram 
+ggplot(data = lobster_traps, aes(x = TRAPS)) +
+  geom_histogram(bins = 20, fill = "tan", color = "black") +
+  facet_wrap(~ YEAR) +
+  labs(
+    title = "distribution of lobster trap counts yearly",
+    x = "number of traps",
+    y = "count"
+  ) +
+  theme_light()
+```
+
+```{r}
+
+lobsters_traps_summarize <- lobster_traps %>% 
+  group_by(SITE, YEAR) %>% 
+  summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
+
+# new line plot
+lobster_line_and_point_plot <- ggplot(
+  data = lobsters_traps_summarize,
+  aes(x = YEAR, y = TOTAL_TRAPS, color = SITE)
+) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "Lobster traps over time by Site",
+    subtitle = "trend by year",
+    x = "Year",
+    y = "number of Traps",
+    color = "Site"
+  ) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    legend.position = "right"
+  )
+
+lobster_line_and_point_plot
+```
+
+```{r}
+
+#filter() for the years 2019, 2020, and 2021
+#Add a new column called FISHING_PRESSURE that contains the values “high” or “low”. A “high” fishing pressure has exactly or more than 8 traps, and a “low” fishing pressure has less than 8 traps. Use mutate() and if_else(). Check your output
+#Calculate the number of “high” and “low” observations using group() and summarize(). Check your output
+#Remove the NA values from the subsetted data. Hint: check out drop_na(). Check your output
+# high vs low fishing pressure, < 8 = low, > 8 = high
+lobster_traps_fishing_pressure <- lobster_traps %>% 
+    filter(YEAR %in% c(2019, 2020, 2021)) %>%
+    mutate(FISHING_PRESSURE = if_else(TRAPS >= 8, true = "high", false = "low")) %>%
+    group_by(SITE, FISHING_PRESSURE) %>%
+    summarize(COUNT = n()) %>%
+    drop_na()
+
+library(scales)
+
+# dodge bar chart
+New_lobster_pressure_plot <- ggplot(
+  data = lobster_traps_fishing_pressure,
+  aes(x = SITE, y = COUNT, fill = FISHING_PRESSURE)
+) +
+  geom_col(position = "dodge", color = "black") +
+  labs(
+    title = "Fishing Pressure of Lobster Traps by Site",
+    subtitle = "High vs low trap counts(2019–2021)",
+    x = "Site",
+    y = "Count",
+    fill = "Fishing Pressure"
+  ) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right"
+  )
+
+New_lobster_pressure_plot 
+```
