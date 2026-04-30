@@ -121,9 +121,7 @@ pretty_line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, col
     panel.grid.major = element_line(linetype = "dotted"),
     panel.background = element_rect(fill = "white")
   )
-
-pretty_line_plot
-print(pretty_line_plot)
+  print(pretty_line_plot)
 ```
 
 ```{r}
