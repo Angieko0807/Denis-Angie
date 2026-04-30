@@ -7,7 +7,7 @@ editor: visual
 
 ## Introduction
 
-This lobster report, that which aids in better understanding of how lobster populations and fishing activity change over time, is essential for managing marine ecosystems. In this report, we analyze lobster abundance, size, and fishing pressure across multiple reef sites in the Santa Barbara Channel.
+In this report, we aim to better understand how lobster populations and fishing activity change over time, which is essential for managing marine ecosystems. Here we specifically analyze patterns in lobster abundance, size, and fishing pressure across multiple reef sites in the Santa Barbara Channel.
 
 ## Data Source
 
@@ -52,8 +52,8 @@ This plot compares the number of high and low fishing pressure observations acro
 
 From these analyses, several patterns emerge:
 
--   Lobster size distributions vary across sites, suggesting differences in population structure or environmental conditions\
--   Lobster abundance trends differ by site, with some showing increases or variability over time\
+-   Lobster size distributions vary across sites, suggesting differences in population structure or environmental conditions
+-   Lobster abundance trends differ by site, with some showing increases or variability over time
 -   Fishing pressure is not uniform, with certain sites experiencing consistently higher trap counts
 
 Together, these findings suggest that both environmental factors and human activity, such as fishing, may influence lobster populations. Additionally, marine protected areas may play a role in shaping these patterns, though further analysis would be needed to confirm this.
