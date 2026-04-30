@@ -25,13 +25,13 @@ This dataset examines California spiny lobster ,*Panulirus interruptus*, abundan
 
 ### Lobster Size Distribution by Site
 
-![](figs/lobster_histogram_owner.png){fig-alt="Histogram showing lobster size distribution across sites"}
+![](../figs/lobster_histogram_owner.png){fig-alt="Histogram showing lobster size distribution across sites"}
 
 This histogram shows how lobster sizes vary across different sites. Some locations show a wider range of sizes, while others are more concentrated, suggesting differences in population structure.
 
 ### Lobster Abundance Over Time
 
-![](figs/lobster_line_plot.png){fig-alt="Line graph showing lobster counts by year and site"}
+![](../figs/lobster_line_plot.png){fig-alt="Line graph showing lobster counts by year and site"}
 
 This plot shows how lobster abundance changes over time at each site. Some sites exhibit increasing or fluctuating trends, while others remain relatively stable, indicating possible environmental or protection-related influences.
 
@@ -40,11 +40,11 @@ This plot shows how lobster abundance changes over time at each site. Some sites
 Data :Lobster_Trap_Counts_All_Years_20210519.csv\
 In this part of our analysis we worked on the lobster trap counts data. Focusing on two questions, how total trap counts changed over time at each site, and how more recent observations from 2019 to 2021 can be categorized into high and low fishing pressure.
 
-![Line plot showing total lobster trap buoy counts over time across sites.](figs/lobster_line_and_point_plot.png)
+![Line plot showing total lobster trap buoy counts over time across sites.](../figs/lobster_line_and_point_plot.png)
 
 This plot shows how total trap buoy counts changed over time at each site. Some sites show higher overall trap counts others remain comparatively low. Here we can see the differences in fishing activity across locations.
 
-![Grouped bar chart showing high and low fishing pressure observations at each site from 2019 to 2021.](figs/lobster_pressure_plot.png)
+![Grouped bar chart showing high and low fishing pressure observations at each site from 2019 to 2021.](../figs/lobster_pressure_plot.png)
 
 This plot compares the number of high and low fishing pressure observations across sites for the years 2019 to 2021. ( \< 8 = low/ \>= 8 = high ) Some sites have more frequent high trap counts, which indictates greater fishing pressure during that time.
 
