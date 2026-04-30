@@ -63,7 +63,9 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 
-lobster_abundance <- read_csv("../data/Lobster_Abundance_All_Years_20220829.csv") %>%
+lobster_abundance <- read_csv(
+  here::here("data", "Lobster_Abundance_All_Years_20220829.csv")
+) %>%
   mutate(SIZE_MM = na_if(SIZE_MM, -99999))
 ```
 
@@ -74,6 +76,14 @@ hist_plot <- ggplot(lobster_abundance, aes(x = SIZE_MM)) +
   labs(title = "Distribution of Lobster Sizes by Site")
 
 hist_plot
+```
+```{r}
+ggsave(
+  filename = here::here("figs", "lobster_histogram_owner.png"),
+  plot = hist_plot,
+  width = 8,
+  height = 6
+)
 ```
 
 ```{r}
@@ -127,7 +137,7 @@ pretty_line_plot <- ggplot(lobster_yearly, aes(x = YEAR, y = total_lobsters, col
 ```{r}
 library(ggplot2)
 ggsave(
-  filename = "figs/lobster_line_plot.png",
+  filename = here::here("figs", "lobster_line_plot.png"),
   plot = pretty_line_plot,
   width = 8,
   height = 5
