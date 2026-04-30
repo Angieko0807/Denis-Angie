@@ -27,13 +27,13 @@ This dataset examines California spiny lobster ,*Panulirus interruptus*, abundan
 
 ![Histogram showing lobster size distribution across sites](../figs/lobster_histogram_owner.png)
 
-This histogram shows how lobster sizes vary across different sites. Some locations show a wider range of sizes, while others are more concentrated, suggesting differences in population structure.
+The size distributions in these histograms show clear differences in population structure across sites. With IVEE and CARP having larger average sizes and wider distributions, which suggests healthier or more mature lobster populations at these locations. In contrast, AQUE and MOHK are more tightly clustered around smaller sizes, indicating either younger populations or possible environmental or fishing pressures limiting growth. NAPL is somewhat in between, with a moderate spread that suggests a mix of size classes but fewer very large individuals.
 
 ### Lobster Abundance Over Time
 
 ![Line graph showing lobster counts by year and site](../figs/lobster_line_plot.png)
 
-This plot shows how lobster abundance changes over time at each site. Some sites exhibit increasing or fluctuating trends, while others remain relatively stable, indicating possible environmental or protection-related influences.
+This lobster abundance plot shows trends that vary significantly by site, with IVEE showing the highest peaks and the most pronounced fluctuations over time. CARP also exhibits strong variability, including a notable spike around 2017, suggesting periods of increased recruitment or favorable conditions. In contrast, AQUE remains consistently low and relatively stable, indicating limited population growth or persistent constraints. MOHK and NAPL show moderate but changing trends, suggesting that both environmental variability and fishing pressure may influence lobster abundance at these sites.
 
 ## Collaborator Analysis and Visualization
 
@@ -50,10 +50,6 @@ This plot compares the number of high and low fishing pressure observations acro
 
 ## Discussion
 
-From these analyses, several patterns emerge:
+Across all analyses, clear site-specific patterns emerge in lobster size, abundance, and fishing pressure. Sites like IVEE and CARP not only show larger and more widely distributed lobster sizes but also exhibit higher and more variable abundance over time, suggesting more established or productive populations. In contrast, AQUE and MOHK tend to have smaller, more concentrated size distributions and lower or more stable abundance, which may reflect environmental limitations or greater external pressures.
 
--   Lobster size distributions vary across sites, suggesting differences in population structure or environmental conditions
--   Lobster abundance trends differ by site, with some showing increases or variability over time
--   Fishing pressure is not uniform, with certain sites experiencing consistently higher trap counts
-
-Together, these findings suggest that both environmental factors and human activity, such as fishing, may influence lobster populations. Additionally, marine protected areas may play a role in shaping these patterns, though further analysis would be needed to confirm this.
+The trap count data adds an important layer by showing that fishing pressure is uneven across sites, with some locations experiencing consistently higher levels of activity, particularly in recent years. These differences in fishing intensity may help explain variations in both lobster size and abundance, as higher pressure can limit growth and reduce population size. Overall, the combined patterns suggest that lobster populations are shaped by an interaction of environmental conditions and human impacts, with potential influences from site protection status such as marine protected areas.
