@@ -7,6 +7,8 @@ editor: visual
 
 ## Introduction
 
+This lobster report, that which aids in better understanding of how lobster populations and fishing activity change over time, is essential for managing marine ecosystems. In this report, we analyze lobster abundance, size, and fishing pressure across multiple reef sites in the Santa Barbara Channel.
+
 ## Data Source
 
 The data in this report come from the Environmental Data Initiative data package:
@@ -19,9 +21,23 @@ This data package contains two tables, one focused on lobster abundance and size
 
 This dataset examines California spiny lobster ,*Panulirus interruptus*, abundance, size, and fishing pressure along the mainland coast of the Santa Barbara Channel. Lobsters are important predators in giant kelp forests, this data sets helps researchers study how fishing and marine protected areas may influence kelp forest communities.
 
+## Owner Analysis and Visualization
+
+### Lobster Size Distribution by Site
+
+![](figs/lobster_histogram_owner.png){fig-alt="Histogram showing lobster size distribution across sites"}
+
+This histogram shows how lobster sizes vary across different sites. Some locations show a wider range of sizes, while others are more concentrated, suggesting differences in population structure.
+
+### Lobster Abundance Over Time
+
+![](figs/lobster_line_plot.png){fig-alt="Line graph showing lobster counts by year and site"}
+
+This plot shows how lobster abundance changes over time at each site. Some sites exhibit increasing or fluctuating trends, while others remain relatively stable, indicating possible environmental or protection-related influences.
+
 ## Collaborator Analysis and Visualization
 
-Data :Lobster_Trap_Counts_All_Years_20210519.csv \
+Data :Lobster_Trap_Counts_All_Years_20210519.csv\
 In this part of our analysis we worked on the lobster trap counts data. Focusing on two questions, how total trap counts changed over time at each site, and how more recent observations from 2019 to 2021 can be categorized into high and low fishing pressure.
 
 ![Line plot showing total lobster trap buoy counts over time across sites.](figs/lobster_line_and_point_plot.png)
@@ -31,3 +47,13 @@ This plot shows how total trap buoy counts changed over time at each site. Some 
 ![Grouped bar chart showing high and low fishing pressure observations at each site from 2019 to 2021.](figs/lobster_pressure_plot.png)
 
 This plot compares the number of high and low fishing pressure observations across sites for the years 2019 to 2021. ( \< 8 = low/ \>= 8 = high ) Some sites have more frequent high trap counts, which indictates greater fishing pressure during that time.
+
+## Discussion
+
+From these analyses, several patterns emerge:
+
+-   Lobster size distributions vary across sites, suggesting differences in population structure or environmental conditions\
+-   Lobster abundance trends differ by site, with some showing increases or variability over time\
+-   Fishing pressure is not uniform, with certain sites experiencing consistently higher trap counts
+
+Together, these findings suggest that both environmental factors and human activity, such as fishing, may influence lobster populations. Additionally, marine protected areas may play a role in shaping these patterns, though further analysis would be needed to confirm this.
