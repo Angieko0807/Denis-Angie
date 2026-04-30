@@ -25,13 +25,13 @@ This dataset examines California spiny lobster ,*Panulirus interruptus*, abundan
 
 ### Lobster Size Distribution by Site
 
-![](../figs/lobster_histogram_owner.png){fig-alt="Histogram showing lobster size distribution across sites"}
+![Histogram showing lobster size distribution across sites](../figs/lobster_histogram_owner.png)
 
 This histogram shows how lobster sizes vary across different sites. Some locations show a wider range of sizes, while others are more concentrated, suggesting differences in population structure.
 
 ### Lobster Abundance Over Time
 
-![](../figs/lobster_line_plot.png){fig-alt="Line graph showing lobster counts by year and site"}
+![Line graph showing lobster counts by year and site](../figs/lobster_line_plot.png)
 
 This plot shows how lobster abundance changes over time at each site. Some sites exhibit increasing or fluctuating trends, while others remain relatively stable, indicating possible environmental or protection-related influences.
 
